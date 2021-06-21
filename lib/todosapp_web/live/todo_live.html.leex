@@ -1,0 +1,17 @@
+
+<form action="#" phx-submit="add" class="bg-white rounded-l-lg rounded-b-lg rounded-r-lg rounded-t-lg shadow-md">
+    <%= text_input :todo, :title, placeholder: "Ingresa un nuevo pago pendiente", class: "bg-gray-200 rounded-l-md rounded-b-md rounded-r-md rounded-t-md p-2 m-12 focus:border-purple-400 border-2" %>
+    <span>u$d</span>
+    <%= text_input :todo, :amount, placeholder: "Monto, ej. 99.99", class: "bg-gray-200 rounded-l-md rounded-b-md rounded-r-md rounded-t-md p-2 focus:border-purple-400 border-2" %>
+    <%= submit "Agregar", phx_disable_with: "Agregando...", class: "p-2 w-40 bg-purple-400 text-white rounded-full font-medium focus:border-transparent hover:shadow-md" %>
+</form>
+
+<%= for todo <- @todos do %>
+<div class="flex w-3/6 flex-row items-center">
+<button type="button" phx-click="del" phx-value-id="<%= todo.id %>" class="w-10 text-white bg-purple-400 p-2 rounded-full focus:border-purple-400 border-2">x</button>
+<%= checkbox(:todo, :done, phx_click: "toggle_done", phx_value_id: todo.id, value: todo.done, class: "m-12") %>
+<p class="text-purple-400"><%= todo.title %></p>
+<p class="m-12">u$d <%= todo.amount %></p>
+
+</div>
+<% end %>
